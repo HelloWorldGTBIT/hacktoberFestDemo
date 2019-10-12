@@ -1,5 +1,8 @@
 #Code File
 
+def printing():
+  print("hello world")
+
 def hellowrol ():
   return"hello world"
   print(hellowrol ())
