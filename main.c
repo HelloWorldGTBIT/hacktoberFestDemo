@@ -1,83 +1,186 @@
 //
 //  main.c
-//  Ps
+//  ll isert
 //
-//  Created by Apple on 18/08/19.
+//  Created by Apple on 10/09/19.
 //  Copyright © 2019 Apple. All rights reserved.
 //
 
-#include<stdio.h>
-#include<stdlib.h>
+
+#include <stdio.h>
+#include <stdlib.h>
 
 
+/* Structure of a node */
+struct node {
+    int data;          // Data
+    struct node *next; // Address
+} *head;
 
-struct Node
-{
-    int data;
-    struct Node *next;
-}*front = NULL,*rear = NULL;
 
-void insert(int);
-void delete();
-void display();
+/* Functions used in program */
+void createList(int n);
+void deleteMiddleNode(int position);
+void displayList(void );
+
 
 int main()
 {
-    int choice, value;
+    int n, position;
+    
+    /*
+     * Create a singly linked list of n nodes
+     */
+    printf("Enter the total number of nodes: ");
+    scanf("%d", &n);
+    createList(n);
+    
+    printf("\nData in the list \n");
+    displayList();
+    
+    printf("\nEnter the node position you want to delete: ");
+    scanf("%d", &position);
+    
+    /* Delete middle node from list */
+    deleteMiddleNode(position);
+    
+    printf("\nData in the list \n");
+    displayList();
+    
+    return 0;
+}
 
-    printf("\n:: Queue Implementation using Linked List ::\n");
-    while(1){
-      printf("\n****** MENU ******\n");
-        printf("1. Insert\n2. Delete\n3. Display\n4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d",&choice);
-        switch(choice){
-            case 1: printf("Enter the value to be insert: ");
-                scanf("%d", &value);
-                insert(value);
+
+/*
+ * Create a list of n nodes
+ */
+void createList(int n)
+{
+    struct node *newNode, *temp;
+    int data, i;
+    
+    head = (struct node *)malloc(sizeof(struct node));
+    
+    /*
+     * If unable to allocate memory for head node
+     */
+    if(head == NULL)
+    {
+        printf("Unable to allocate memory.");
+    }
+    else
+    {
+        /*
+         * Read data of node from the user
+         */
+        printf("Enter the data of node 1: ");
+        scanf("%d", &data);
+        
+        head->data = data; // Link the data field with data
+        head->next = NULL; // Link the address field to NULL
+        
+        temp = head;
+        
+        /*
+         * Create n nodes and adds to linked list
+         */
+        for(i=2; i<=n; i++)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+            
+            /* If memory is not allocated for newNode */
+            if(newNode == NULL)
+            {
+                printf("Unable to allocate memory.");
                 break;
-            case 2: delete(); break;
-            case 3: display(); break;
-            case 4: exit(0);
-            default: printf("\nWrong selection!!! Please try again!!!\n");
+            }
+            else
+            {
+                printf("Enter the data of node %d: ", i);
+                scanf("%d", &data);
+                
+                newNode->data = data; // Link the data field of newNode with data
+                newNode->next = NULL; // Link the address field of newNode with NULL
+                
+                temp->next = newNode; // Link previous node i.e. temp to the newNode
+                temp = temp->next;
+            }
         }
+        
+        printf("SINGLY LINKED LIST CREATED SUCCESSFULLY\n");
     }
 }
-void insert(int value)
-{
-    struct Node *newNode;
-    newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode -> next = NULL;
-    if(front == NULL)
-        front = rear = newNode;
-    else{
-        rear -> next = newNode;
-        rear = newNode;
-    }
-    printf("\nInsertion is Success!!!\n");
-}
-void delete()
-{
-    if(front == NULL)
-        printf("\nQueue is Empty!!!\n");
-    else{
-        struct Node *temp = front;
-        front = front -> next;
-        printf("\nDeleted element: %d\n", temp->data);
 
+
+
+/*
+ * Delete middle node of the linked list
+ */
+void deleteMiddleNode(int position)
+{
+    int i;
+    struct node *toDelete, *prevNode;
+    
+    if(head == NULL)
+    {
+        printf("List is already empty.");
+    }
+    else
+    {
+        toDelete = head;
+        prevNode = head;
+        
+        for(i=2; i<=position; i++)
+        {
+            prevNode = toDelete;
+            toDelete = toDelete->next;
+            
+            if(toDelete == NULL)
+                break;
+        }
+        
+        if(toDelete != NULL)
+        {
+            if(toDelete == head)
+                head = head->next;
+            
+            prevNode->next = toDelete->next;
+            toDelete->next = NULL;
+            
+            /* Delete nth node */
+            free(toDelete);
+            
+            printf("SUCCESSFULLY DELETED NODE FROM MIDDLE OF LIST\n");
+        }
+        else
+        {
+            printf("Invalid position unable to delete.");
+        }
     }
 }
-void display()
+
+
+/*
+ * Display entire list
+ */
+void displayList()
 {
-    if(front == NULL)
-        printf("\nQueue is Empty!!!\n");
-    else{
-        struct Node *temp = front;
-        while(temp->next != NULL){
-            printf("%d--->",temp->data);
-            temp = temp -> next;
+    struct node *temp;
+    
+    /*
+     * If the list is empty i.e. head = NULL
+     */
+    if(head == NULL)
+    {
+        printf("List is empty.");
+    }
+    else
+    {
+        temp = head;
+        while(temp != NULL)
+        {
+            printf("Data = %d\n", temp->data); // Print the data of current node
+            temp = temp->next;                 // Move to next node
         }
-        printf("%d--->NULL\n",temp->data);
     }
 }
