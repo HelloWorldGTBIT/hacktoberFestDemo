@@ -1,0 +1,21 @@
+#include<graphics.h>
+#include<conio.h>
+
+int main()
+{
+    int errorcode,gd=DETECT,gm;
+    initgraph(&gd,&gm,"");
+    errorcode = graphresult();
+    if(errorcode!=grOk){
+        printf("Graphic Error occurred : %s\n", grapherrormsg(errorcode));
+        exit(1);
+    }
+    setcolor(GREEN);
+    setfillstyle(SOLID_FILL,WHITE);
+    rectangle(0,0,getmaxx(),getmaxy());
+    floodfill(10,10,GREEN);
+    putpixel(320,240,RED);
+    getch();
+    closegraph();
+    return 0;
+}
