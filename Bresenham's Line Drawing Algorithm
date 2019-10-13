@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<graphics.h>
+#include<conio.h>
+
+main(){
+    int x1,x2,i,y1,y2,x,y,dx,dy,ds=0,dt=0,d,gd=DETECT,gm,xinc=0,yinc=0;
+    printf("\nEnter the coordinates of line\nx1: ");
+    scanf("%d",&x1);
+    printf("y1: ");
+    scanf("%d",&y1);
+    printf("x2: ");
+    scanf("%d",&x2);
+    printf("y2: ");
+    scanf("%d",&y2);
+    initgraph(&gd, &gm, "");
+    setcolor(BLUE);
+    setfillstyle(SOLID_FILL, WHITE);
+    rectangle(0,0, getmaxx(),getmaxy());
+    floodfill(5,5,BLUE);
+    dx=x2-x1, dy=y2-y1,x=x1,y=y1;
+    if (dx<0)
+        dx=-dx;
+    xinc = 1;
+    if(dy<0)
+        dy=-dy;
+    yinc=1;
+    if(x2<x1)
+        xinc=-1;
+    if(y2<y1)
+        yinc=-1;
+    putpixel(x,y,GREEN);
+    if(dx>dy){
+        d=(2*dy)-dx;
+        ds += 2*dy;
+        dt += (2*dy)-(2*dx);
+        i=0;
+        while (i<dx){
+            x+=xinc;
+            if(d<0)
+                d+=ds;
+            else{
+                y+=yinc;
+                d+=dt;
+            }
+            i+=1;
+            putpixel(x,y,GREEN);
+        }
+    }
+
+    else{
+        d=2*dx-dy;
+        ds += 2*dx;
+        dt += 2*dx-2*dy;
+        i=0;
+        while (i<dy){
+            y+=yinc;
+            if(d<0)
+                d+=ds;
+            else{
+                x+=xinc;
+                d+=dt;
+            }
+            i+=1;
+            putpixel(x,y,GREEN);
+        }
+    }
+    getch();
+    closegraph();
+}
