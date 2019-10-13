@@ -1,0 +1,13 @@
+print("|----------Program to check given Number is Palindrome or Not----------|")
+num=int(input("Enter a Number:- "))
+num2=num
+rev=0
+ren=0
+while(num>0):
+    rem=num%10
+    rev=rev*10+rem
+    num//=10
+if(rev==num2):
+    print("Number is Palindrome")
+else:
+    print("Number is not Palindrome")
