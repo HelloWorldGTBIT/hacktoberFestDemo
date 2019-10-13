@@ -1,0 +1,9 @@
+str1 = input("Enter Full form to make Acronym\n")+" "
+li = []
+start=0
+for i in range(len(str1)):
+    if str1[i]==' ':
+        li.append(str1[start:i])
+        start=i+1
+for i in range(len(li)):
+    print(li[i][:1],end=".")
