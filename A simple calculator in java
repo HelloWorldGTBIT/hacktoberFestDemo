@@ -1,0 +1,51 @@
+/*******Created by Sumit kumar**********/
+
+/**In this Im use multiple inputs but in sololern we need to give all inputs at a single time so... For run the program you need to put three inputs ...first two for enter the two no. on which u want to perform action..and third input  is between 1-4 (for performing various action)...**/
+
+import java.util.*;
+class Calculator
+{
+    public static void main(String[] args)
+    {
+    int x;
+    float a,b;
+    System.out.println("Enter Two Numbers:");
+    Scanner sk=new Scanner(System.in);
+    a=sk.nextInt();
+    b=sk.nextInt();
+    System.out.println(a)
+;
+    System.out.println(b);
+    float add=a+b; 
+    float sub=a-b;
+    float mul=a*b;
+    float div=a/b;
+if(true)
+    {
+        System.out.println("\nEnter Your Choice:");
+        System.out.println("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division");
+        x=sk.nextInt();
+
+        if(x==1)
+        {
+            System.out.println("Sum of Entered Numbers:"+add);
+        }
+        if(x==2)
+        {
+            System.out.println("Subtraction of the Enetred Numbers:"+sub);
+
+        }
+        if(x==3)
+        {
+            System.out.println("Multiplication of The Entered Numbers:"+mul);
+
+        }
+        if (x==4)
+        {
+            System.out.println("Division of The Entered Numebers:"+div);
+        }
+        
+    }
+    
+    }
+}
