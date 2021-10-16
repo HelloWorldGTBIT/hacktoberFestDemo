@@ -1,25 +1,25 @@
 #include<iostream>
-using namespace std;
-int main(){
-int n;
-cin>>n;
-for(int i=0;i<n;i++){
+
+int main(int argc,char **argv){
+  int n;
+  std::cin>>n;
+  for(int i=0;i<n;++i){
     //for ith row
     for(int j=0;j<=i;j++){
-        cout<<"*";
+        std::cout<<"*";
     }
-    cout<<" ";
+    std::cout<<" ";
     for(int j=0;j<n-i;j++){
-        cout<<"*";
+        std::cout<<"*";
     }
-    cout<<" ";
+    std::cout<<" ";
     for(int j=0;j<n-i;j++){
-        cout<<"*";
+        std::cout<<"*";
     }
-    cout<<" ";
+    std::cout<<" ";
     for(int j=0;j<=i;j++){
-        cout<<"*";
+        std::cout<<"*";
     }
-    cout<<endl;
-}
+    std::cout<<std::endl;
+  }
 }
